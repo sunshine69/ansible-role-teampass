@@ -3,17 +3,17 @@
 php_memory_limit: "128M"
 php_max_execution_time: "120"
 php_packages:
-  - php5.6
-  - php5.6-cli
-  - php5.6-common
-  - php5.6-mysql
-  - php5.6-mcrypt
-  - php5.6-json
-  - php5.6-gd
-  - php5.6-mbstring
-  - php5.6-xml
-  - php5.6-bcmath
+  - php7.1
+  - php7.1-cli
+  - php7.1-common
+  - php7.1-mysql
+  - php7.1-mcrypt
+  - php7.1-json
+  - php7.1-gd
+  - php7.1-mbstring
+  - php7.1-xml
+  - php7.1-bcmath
   - php-mysqlnd-ms
 php_conf_paths:
-  - /etc/php/5.6/apache2
-  - /etc/php/5.6/cli
+  - /etc/php/7.1/apache2
+  - /etc/php/7.1/cli
