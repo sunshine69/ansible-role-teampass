@@ -1,13 +1,48 @@
 DirectoryIndex index.php index.html
 
-
-<VirtualHost *:80>
+{% if teampass_ssl_enabled|default(true) %}
+<VirtualHost *:443>
   ServerName {{ teampass_server_name }}
-  DocumentRoot /var/www/teampass
+  DocumentRoot {{ doc_root }}
 
-  <Directory "/var/www/teampass">
+  SSLEngine on
+  # Required when using https and ProxyPass
+  SSLProxyEngine on
+  SSLProxyVerify none
+  SSLProxyCheckPeerCN off
+  SSLProxyCheckPeerName off
+  SSLProxyCheckPeerExpire off
+  # End
+  SSLCertificateFile {{ teampass_ssl_cert_path }}
+  SSLCertificateKeyFile {{ teampass_ssl_key_path }}
+{% if teampass_ssl_certchain_path is defined and teampass_ssl_certchain_path %}
+  SSLCertificateChainFile {{ teampass_ssl_certchain_path }}
+{% endif %}
+
+  <Directory "{{ doc_root }}">
     AllowOverride All
     Options -Indexes +FollowSymLinks
     Require all granted
   </Directory>
+
+ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:///run/php/php7.1-fpm.sock|fcgi://localhost{{ doc_root }}/
+
 </VirtualHost>
+{% else %}
+# This only for testing when you do not bother setup certificates.
+<VirtualHost *:80>
+  ServerName {{ teampass_server_name }}
+  DocumentRoot {{ doc_root }}
+
+  <Directory "{{ doc_root }}">
+    AllowOverride All
+    Options -Indexes +FollowSymLinks
+    Require all granted
+  </Directory>
+
+ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:///run/php/php7.1-fpm.sock|fcgi://localhost{{ doc_root }}/
+
+</VirtualHost>
+
+
+{% endif %}

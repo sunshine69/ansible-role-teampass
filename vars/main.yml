@@ -4,6 +4,8 @@ php_memory_limit: "128M"
 php_max_execution_time: "120"
 php_packages:
   - php7.1
+  - php7.1-fpm
+  - php7.1-curl
   - php7.1-cli
   - php7.1-common
   - php7.1-mysql
