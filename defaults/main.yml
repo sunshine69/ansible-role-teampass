@@ -8,3 +8,6 @@ teampass_ssl_enabled: false
 teampass_ssl_cert_path: /etc/apache2/teampass-cert.crt
 teampass_ssl_key_path: /etc/apache2/teampass-key.key
 teampass_ssl_certchain_path: /etc/apache2/teampass-certchain.crt
+teampass_ssl_cert:
+teampass_ssl_key:
+teampass_ssl_certchain:
